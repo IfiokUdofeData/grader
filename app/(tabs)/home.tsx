@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { images, icons } from "../../constants";
 import ItemCard from '@/components/itemCard';
 import { StatusBar } from 'expo-status-bar';
+import TopFilter from '@/components/topFilter';
 
 const DATA = [
   {
@@ -58,15 +59,18 @@ const Item = ({ title }: titleType) => (
 
 const Home = () => {
   return (
-    <SafeAreaView className="bg-primary h-full w-full">
-      <View className="flex-row justify-between items-center pl-4 pr-4">
+    <SafeAreaView className="bg-primary h-full">
+      <View className="bg-black-200 flex-row justify-between items-center pl-4 pr-4">
         {/* Profile Icon */}
-        <View className='flex-row justify-start items-center gap-2'>
-          <Image
-            className="h-6 w-6"
-            source={icons.profile}
-          />
-          <Text>Ifiok Udofe</Text>
+        <View className='flex-row justify-start items-center gap-2 pt-4'>
+
+          <View className='border-2 rounded-full p-1 border-secondary-300'>
+            <Image
+              className="h-5 w-5"
+              source={icons.profile}
+            />
+          </View>
+          <Text className='text-white text-1xl font-psemibold pl-3'>ifiok Udofe</Text>
         </View>
 
         {/* Search Icon */}
@@ -77,7 +81,26 @@ const Home = () => {
           />
         </View>
       </View>
-      
+
+      <View className='pt-4 pb-2 px-4 flex-row justify-center items-center bg-black-200'>
+        <ItemCard
+          title='Scan'
+        />
+        <ItemCard
+          title='Report'
+        />
+        <ItemCard
+          title='Grade'
+        />
+
+      </View>
+
+      <View>
+        <TopFilter />
+
+        
+      </View>
+
       <StatusBar />
     </SafeAreaView>
   );

@@ -1,15 +1,16 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text, TouchableOpacity } from 'react-native';
+import React from 'react';
 
 type Itemdetails = {
-    title: string
-}
-const ItemCard = ({ title }: Itemdetails) => {
-  return (
-    <View className='w-6 h-6 bg-secondary-300'>
-      <Text className='text-white text-2xl'>{title}</Text> 
-    </View>
-  )
-}
+  title: string;
+};
 
-export default ItemCard
+const ItemCard = ({ title}: Itemdetails) => {
+  return (
+    <TouchableOpacity className={`w-24 h-16 rounded flex-row justify-center items-center border-1 border-white bg-primary py-1 px-2 mx-3 my-2`}>
+      <Text className='text-white text-xl font-psemibold'>{title}</Text>
+    </TouchableOpacity>
+  );
+};
+
+export default ItemCard;

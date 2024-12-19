@@ -14,6 +14,7 @@ import play from "../assets/icons/play.png";
 import projects from "../assets/icons/projects.png";
 import grade from "../assets/icons/grade.png";
 import scan from "../assets/icons/scan.png";
+import sortdown from "../assets/icons/sortdown.png"; 
 
 export default {
   play,
@@ -32,4 +33,5 @@ export default {
   projects,
   grade,
   scan,
+  sortdown
 };
