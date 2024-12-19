@@ -1,51 +1,69 @@
-# Welcome to the grader app 👋
+# Welcome to the Grader App 👋
 
+## About the Project
 
-## Get started
+Grader App is an innovative mobile application designed to simplify and modernize the exam grading process. By leveraging the power of AI and image processing, this app automatically grades exam answer scripts when you take a picture of them. Whether you're a teacher, an examiner, or an institution looking to streamline grading workflows, Grader App offers a fast, accurate, and hassle-free solution.
 
-1. Install dependencies
+### Key Features:
+- **AI-Powered Script Recognition:** Automatically identifies and processes exam answer sheets using cutting-edge image recognition technology.
+- **Customizable Grading Schemes:** Supports a variety of grading methods to cater to different marking criteria and systems.
+- **Error Detection:** Highlights discrepancies or unclear answers for manual review.
+- **User-Friendly Interface:** Designed for ease of use, with intuitive navigation and minimal setup.
+- **Data Privacy:** Ensures all scripts and grades are securely stored and handled.
 
-   ```bash
-   npm install
-   ```
+## Get Started
 
-2. Start the app
+Follow these steps to set up and start developing the Grader App:
 
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-- Due to the native dependencies used to build this app, Expo Go can not be used to test the app in development mode.
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## About the project
-
-When you're ready, run:
-
+### 1. Install Dependencies
+Run the following command to install all necessary dependencies:
 ```bash
-npm run reset-project
+npm install
 ```
 
-This command will ......
+### 2. Start the App
+Launch the development environment using:
+```bash
+npx expo start
+```
 
-## Learn more
+### Development Options:
+After starting, you’ll have several options to open the app:
 
-To learn more about developing your project ....
+- [Development Build](https://docs.expo.dev/develop/development-builds/introduction/): Fully compatible environment for testing all features.
+- [Android Emulator](https://docs.expo.dev/workflow/android-studio-emulator/): Simulate the app on Android devices.
+- [iOS Simulator](https://docs.expo.dev/workflow/ios-simulator/): Simulate the app on iOS devices.
+- [Expo Go](https://expo.dev/go): A sandbox for quick testing. Note that some native dependencies may not function in Expo Go.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+**Important:** Due to the use of native dependencies, testing in Expo Go is limited. Use a development build for full functionality.
 
-## Join the community
+### 3. Start Developing
+Begin by editing files in the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction), making navigation and component management simple and efficient.
 
-Join our community of developers creating universal apps.
+## Advanced Commands
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### Writing Native code
+If you need to write a Native code for the project, locate the android and ios folders in the modules/my-modules folders and write your custom code. After adding a native code, you need to prebuild your code with any of the following options:
+
+Building for android:
+```bash
+npx expo run:android
+```
+Building for ios:
+```bash
+npx expo run:ios
+```
+
+
+## Contributing
+We welcome contributions! If you have ideas or improvements, please open an issue or submit a pull request. Together, we can make grading smarter and easier for everyone.
+
+## License
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
+
+## Contact
+For support or further information, please contact:
+- Email: [udofeifiok@gmail.com](mailto:udofeifiok@gmail.com)
+- Website: [Daverze](http://daverze.com)
+
+Thank you for using Grader App! Let's revolutionize the grading process.
