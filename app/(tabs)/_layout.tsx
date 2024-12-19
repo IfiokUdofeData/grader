@@ -1,45 +1,111 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-import { Platform } from 'react-native';
+import { View, Text, Image } from 'react-native'
+import { Tabs, Redirect } from 'expo-router'
+import { icons } from '../../constants';
 
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
 
+type TabIconType = {
+  icon: string 
+  color: string
+  name: string
+  focused: boolean
+}
+
+const TabIcon = ({ icon, color, name, focused }: TabIconType) => {
   return (
+    <View className='w-12 items-center justify-center gap-2'>
+      <Image
+        source={icon}
+        resizeMode='contain'
+        tintColor={color}
+        className='w-6 h-6 mt-4'
+      />
+
+      <Text className={`${focused ? 'font-psemibold' : 'font-pregular'} text-xs`} style={{ color: color }}>
+        {name}
+      </Text>
+    </View>
+  )
+}
+
+export default function Layout() {
+  return (
+
+
     <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
-          },
-          default: {},
-        }),
-      }}>
+    screenOptions={{
+      tabBarShowLabel: false,
+      headerShown: false,
+      tabBarActiveTintColor: '#5fc3da',
+      tabBarInactiveTintColor: '#CDCDE0',
+      tabBarStyle: {
+        backgroundColor: '#161620',
+        borderTopWidth: 0,
+        borderTopColor: '#232533',
+        height: 65,
+      }
+    }}
+    >
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: "Home",
+          tabBarIcon: ({ color, focused }) => (
+            <TabIcon
+              icon={icons.home}
+              color={color}
+              name="Home"
+              focused={focused}
+            />
+          )
         }}
       />
+
       <Tabs.Screen
-        name="explore"
+        name="grade"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: "Grade",
+          tabBarIcon: ({ color, focused }) => (
+            <TabIcon
+              icon={icons.grade}
+              color={color}
+              name="Grade"
+              focused={focused}
+            />
+          )
         }}
       />
+
+      <Tabs.Screen
+        name="projects"
+        options={{
+          title: "Project",
+          tabBarIcon: ({ color, focused }) => (
+            <TabIcon
+              icon={icons.projects}
+              color={color}
+              name="Project"
+              focused={focused}
+            />
+          )
+        }}
+      />
+
+      <Tabs.Screen
+        name="scan"
+        options={{
+          title: "Scan",
+          tabBarIcon: ({ color, focused }) => (
+            <TabIcon
+              icon={icons.scan}
+              color={color}
+              name="Scan"
+              focused={focused}
+            />
+          )
+        }}
+      />
+
     </Tabs>
   );
 }
