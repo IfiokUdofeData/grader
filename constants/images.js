@@ -9,5 +9,6 @@ import logoimage from "../assets/images/logoimage.png";
 import logoLetter from "../assets/images/logoLetter.png";
 import coverimage from "../assets/images/coverimage.png";
 import startai from "../assets/images/startai.png";
+import doc from "../assets/images/doc.jpeg"
 
-export default { profile, thumbnail, cards, path, logo, logoSmall, empty, logoimage, logoLetter, coverimage, startai };
+export default { profile, thumbnail, cards, path, logo, logoSmall, empty, logoimage, logoLetter, coverimage, startai, doc };
