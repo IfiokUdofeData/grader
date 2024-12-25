@@ -1,96 +1,80 @@
 import ItemCard from "@/components/itemCard";
 import TopFilter from "@/components/topFilter";
-import { icons } from "@/constants";
+import { icons, images } from "@/constants";
 import React, { useState, useEffect } from "react";
 import { FlatList, Text, View, StyleSheet, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import RenderItem from "../../components/renderItem"
+import NewProject from "@/components/newProject";
 
 
-const documents = [
-  { id: 1, documentName: "Report_01", dateCreated: "2024-12-01", numberOfItems: 5 },
-  { id: 2, documentName: "Invoice_2024", dateCreated: "2024-12-02", numberOfItems: 12 },
-  { id: 3, documentName: "Budget_Summary", dateCreated: "2024-11-30", numberOfItems: 8 },
-  { id: 4, documentName: "Meeting_Minutes", dateCreated: "2024-12-05", numberOfItems: 6 },
-  { id: 5, documentName: "Task_List", dateCreated: "2024-11-28", numberOfItems: 15 },
-  { id: 6, documentName: "Project_Plan", dateCreated: "2024-12-03", numberOfItems: 20 },
-  { id: 7, documentName: "Weekly_Report", dateCreated: "2024-11-25", numberOfItems: 7 },
-  { id: 8, documentName: "Expense_Sheet", dateCreated: "2024-12-04", numberOfItems: 10 },
-  { id: 9, documentName: "Client_Notes", dateCreated: "2024-12-06", numberOfItems: 3 },
-  { id: 10, documentName: "Performance_Review", dateCreated: "2024-11-29", numberOfItems: 9 },
-  { id: 11, documentName: "Audit_Log", dateCreated: "2024-12-07", numberOfItems: 11 },
-  { id: 12, documentName: "Employee_Roster", dateCreated: "2024-11-26", numberOfItems: 4 },
-  { id: 13, documentName: "Sales_Report", dateCreated: "2024-12-08", numberOfItems: 16 },
-  { id: 14, documentName: "Inventory_List", dateCreated: "2024-11-27", numberOfItems: 13 },
-  { id: 15, documentName: "Strategy_Plan", dateCreated: "2024-12-09", numberOfItems: 18 },
-  { id: 16, documentName: "Feedback_Form", dateCreated: "2024-12-10", numberOfItems: 2 },
-  { id: 17, documentName: "Delivery_Schedule", dateCreated: "2024-11-23", numberOfItems: 14 },
-  { id: 18, documentName: "Product_Catalog", dateCreated: "2024-12-11", numberOfItems: 19 },
-  { id: 19, documentName: "Workshop_Agenda", dateCreated: "2024-11-24", numberOfItems: 5 },
-  { id: 20, documentName: "Marketing_Plan", dateCreated: "2024-12-12", numberOfItems: 17 },
-  { id: 21, documentName: "Report_01", dateCreated: "2024-12-01", numberOfItems: 5 },
-  { id: 22, documentName: "Invoice_2024", dateCreated: "2024-12-02", numberOfItems: 12 },
-  { id: 23, documentName: "Budget_Summary", dateCreated: "2024-11-30", numberOfItems: 8 },
-  { id: 24, documentName: "Meeting_Minutes", dateCreated: "2024-12-05", numberOfItems: 6 },
-  { id: 25, documentName: "Task_List", dateCreated: "2024-11-28", numberOfItems: 15 },
-  { id: 26, documentName: "Project_Plan", dateCreated: "2024-12-03", numberOfItems: 20 },
-  { id: 27, documentName: "Weekly_Report", dateCreated: "2024-11-25", numberOfItems: 7 },
-  { id: 28, documentName: "Expense_Sheet", dateCreated: "2024-12-04", numberOfItems: 10 },
-  { id: 29, documentName: "Client_Notes", dateCreated: "2024-12-06", numberOfItems: 3 },
-  { id: 30, documentName: "Performance_Review", dateCreated: "2024-11-29", numberOfItems: 9 },
-  { id: 31, documentName: "Audit_Log", dateCreated: "2024-12-07", numberOfItems: 11 },
-  { id: 32, documentName: "Employee_Roster", dateCreated: "2024-11-26", numberOfItems: 4 },
-  { id: 33, documentName: "Sales_Report", dateCreated: "2024-12-08", numberOfItems: 16 },
-  { id: 34, documentName: "Inventory_List", dateCreated: "2024-11-27", numberOfItems: 13 },
-  { id: 35, documentName: "Strategy_Plan", dateCreated: "2024-12-09", numberOfItems: 18 },
-  { id: 36, documentName: "Feedback_Form", dateCreated: "2024-12-10", numberOfItems: 2 },
-  { id: 37, documentName: "Delivery_Schedule", dateCreated: "2024-11-23", numberOfItems: 14 },
-  { id: 38, documentName: "Product_Catalog", dateCreated: "2024-12-11", numberOfItems: 19 },
-  { id: 39, documentName: "Workshop_Agenda", dateCreated: "2024-11-24", numberOfItems: 5 },
-  { id: 40, documentName: "Marketing_Plan", dateCreated: "2024-12-12", numberOfItems: 17 },
+const documentsData = [
+  { id: 1, imageUrl: "url1.jpg", iconType: "report", name: "Report_01", date: "2024-12-01", number: 5 },
+  { id: 2, imageUrl: "url2.jpg", iconType: "scan", name: "Invoice_2024", date: "2024-12-02", number: 12 },
+  { id: 3, imageUrl: "url3.jpg", iconType: "grader", name: "Budget_Summary", date: "2024-11-30", number: 8 },
+  { id: 4, imageUrl: "url4.jpg", iconType: "report", name: "Meeting_Minutes", date: "2024-12-05", number: 6 },
+  { id: 5, imageUrl: "url5.jpg", iconType: "result", name: "Task_List", date: "2024-11-28", number: 15 },
+  { id: 6, imageUrl: "url6.jpg", iconType: "report", name: "Project_Plan", date: "2024-12-03", number: 20 },
+  { id: 7, imageUrl: "url7.jpg", iconType: "scan", name: "Weekly_Report", date: "2024-11-25", number: 7 },
+  { id: 8, imageUrl: "url8.jpg", iconType: "grader", name: "Expense_Sheet", date: "2024-12-04", number: 10 },
+  { id: 9, imageUrl: "url9.jpg", iconType: "result", name: "Client_Notes", date: "2024-12-06", number: 3 },
+  { id: 10, imageUrl: "url10.jpg", iconType: "report", name: "Performance_Review", date: "2024-11-29", number: 9 },
+  { id: 11, imageUrl: "url11.jpg", iconType: "scan", name: "Audit_Log", date: "2024-12-07", number: 11 },
+  { id: 12, imageUrl: "url12.jpg", iconType: "grader", name: "Employee_Roster", date: "2024-11-26", number: 4 },
+  { id: 13, imageUrl: "url13.jpg", iconType: "result", name: "Sales_Report", date: "2024-12-08", number: 16 },
+  { id: 14, imageUrl: "url14.jpg", iconType: "scan", name: "Inventory_List", date: "2024-11-27", number: 13 },
+  { id: 15, imageUrl: "url15.jpg", iconType: "grader", name: "Strategy_Plan", date: "2024-12-09", number: 18 },
+  { id: 16, imageUrl: "url16.jpg", iconType: "result", name: "Feedback_Form", date: "2024-12-10", number: 2 },
+  { id: 17, imageUrl: "url17.jpg", iconType: "report", name: "Delivery_Schedule", date: "2024-11-23", number: 14 },
+  { id: 18, imageUrl: "url18.jpg", iconType: "grader", name: "Product_Catalog", date: "2024-12-11", number: 19 },
+  { id: 19, imageUrl: "url19.jpg", iconType: "scan", name: "Workshop_Agenda", date: "2024-11-24", number: 5 },
+  { id: 20, imageUrl: "url20.jpg", iconType: "result", name: "Marketing_Plan", date: "2024-12-12", number: 17 },
 ];
 
 
-type Document = {
+
+type DocumentData = {
   id: number;
-  documentName: string;
-  dateCreated: string;
-  numberOfItems: number;
+  imageUrl: string | { uri: string };
+  iconType: string;
+  name: string;
+  date: string;
+  number: number;
 };
 
+
+
 type RenderType = {
-  item: Document;
+  item: DocumentData;
   index: number;
 };
 
 const Home = () => {
-  const [firstItem, setFirstItem] = useState<Document | null>(null);
+  const [firstItem, setFirstItem] = useState<DocumentData | null>(null);
 
   useEffect(() => {
-    if (documents.length > 0) {
-      setFirstItem(documents[0]);
+    if (documentsData.length > 0) {
+      setFirstItem(documentsData[0]);
     }
   }, []);
 
   const renderHeader = () => (
     <View className='pt-4 pb-2 px-4 flex-row justify-center items-center bg-black-200'>
-    <ItemCard
-      title='Scan'
-    />
-    <ItemCard
-      title='Report'
-    />
-    <ItemCard
-      title='Grade'
-    />
-
-  </View>
-  );
-
-  const renderStickyHeader = () => (
-    <View style={styles.stickyHeader}>
-      <Text style={styles.stickyHeaderText}>Sticky Header</Text>
+      <ItemCard
+        title='Scan'
+        url={icons.image}
+      />
+      <ItemCard
+        title='Report'
+        url={icons.wordfile}
+      />
+      <ItemCard
+        title='Grade'
+        url={icons.grid}
+      />
     </View>
   );
+
 
   const renderItem = ({ item, index }: RenderType) => {
     if (index === 0) {
@@ -103,104 +87,83 @@ const Home = () => {
       return (
         <View>
 
-        <View style={styles.item}>
-          <Text className="text-white">
-          {firstItem?.documentName}
-          </Text>
-        </View>
+          <RenderItem 
+            id={firstItem?firstItem.id: 0}
+            iconType={firstItem?firstItem.iconType: ""}
+            imageUrl={firstItem?firstItem.imageUrl: ""}
+            name={firstItem?firstItem.name: ""}
+            date={firstItem?firstItem.date: ""}
+            number={firstItem?firstItem.number: 0}
+          />
 
-        <View style={styles.item}>
-          <Text className="text-white">
-          {item.documentName}
-          </Text>
-        </View>
+          <RenderItem
+            id={item.id}
+            iconType={item.iconType}
+            imageUrl={item.imageUrl}
+            name={item.name}
+            date={item.date}
+            number={item.number}
+          />
 
         </View>
       );
-    } else{
+    } else {
 
       return (
-        <View style={styles.item}>
-          <Text className="text-white">{item.documentName}</Text>
-        </View>
+        <RenderItem
+        id={item.id}
+        iconType={item.iconType}
+        imageUrl={item.imageUrl}
+        name={item.name}
+        date={item.date}
+        number={item.number}
+        />
       );
     }
   };
-
+   
   return (
 
-  <SafeAreaView className="bg-primary h-full">
+    <SafeAreaView className="bg-primary h-full relative">
 
-    <View className="bg-black-200 flex-row justify-between items-center  py-2 pl-4 pr-4">
-      <View className='flex-row justify-start items-center gap-2 pt-4'>
+      <View className="bg-black-200 flex-row justify-between items-center  py-2 pl-4 pr-4">
+        <View className='flex-row justify-start items-center gap-2 pt-4'>
 
-        <View className='border-2 rounded-full p-1 border-secondary-300'>
+          <View className='border-2 rounded-full p-1 border-secondary-300'>
+            <Image
+              className="h-6 w-6"
+              source={images.ifiok}
+            />
+          </View>
+          <Text className='text-white text-1xl font-psemibold pl-3'>ifiok Udofe</Text>
+        </View>
+
+        <View>
           <Image
-            className="h-5 w-5"
-            source={icons.profile}
+            className="h-6 w-6"
+            source={icons.search}
           />
         </View>
-        <Text className='text-white text-1xl font-psemibold pl-3'>ifiok Udofe</Text>
       </View>
 
-      <View>
-        <Image
-          className="h-6 w-6"
-          source={icons.search}
-        />
-      </View>
-    </View>
-
-    <FlatList
-      data={documents}
-      renderItem={renderItem}
-      keyExtractor={(item) => item.id.toString()}
-      ListHeaderComponent={renderHeader()}
-      stickyHeaderIndices={[1]} // Adjust index if needed
+      <FlatList
+        data={documentsData}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
+        ListHeaderComponent={renderHeader()}
+        stickyHeaderIndices={[1]} // Adjust index if needed
 
       />
-  </SafeAreaView>
+
+      <View className='absolute bottom-6 right-8'>
+        <NewProject />
+      </View>
+    </SafeAreaView>
 
 
-    
+
   );
 };
 
-const styles = StyleSheet.create({
-  header: {
-    backgroundColor: "#f8f9fa",
-    padding: 15,
-    borderBottomWidth: 1,
-    borderColor: "#ddd",
-  },
-  headerText: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  stickyHeader: {
-    backgroundColor: "#ffcc00",
-    padding: 15,
-    borderBottomWidth: 1,
-    borderColor: "#ddd",
-  },
-  stickyHeaderText: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "white",
-  },
-  item: {
-    padding: 20,
-    borderBottomWidth: 1,
-    borderColor: "#ccc",
-  },
-  listHeaderComponent: {
-    zIndex: 1,
-  },
-  footer: {
-    textAlign: "center",
-    padding: 15,
-    backgroundColor: "#f2f2f2",
-  },
-});
 
 export default Home;

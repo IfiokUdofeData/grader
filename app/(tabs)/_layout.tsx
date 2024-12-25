@@ -15,7 +15,7 @@ const TabIcon = ({ icon, color, name, focused }: TabIconType) => {
   return (
     <View className='w-12 items-center justify-center gap-2'>
       <Image
-        source={icon}
+        source={icon? icon : require("../../assets/icons/search.png")}
         resizeMode='contain'
         tintColor={color}
         className='w-6 h-6 mt-4'
